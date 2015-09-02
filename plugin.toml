@@ -1,0 +1,11 @@
+[plugin]
+name = "__dash-jar-local"
+description = "Replaces the Azure storage jars on the local filesystem to DASH storage jars."
+version = "1.0"
+maintainer_name = "Hortonworks"
+maintainer_email = ""
+website_url = "http://github.com/sequenceiq/__dash-jar-local"
+
+[plugin.config]
+
+[plugin.compatibility]

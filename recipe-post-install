@@ -1,0 +1,2 @@
+#!/bin/bash
+find / -name "azure-storage*.jar" | while read line; do echo "Replacing $line"; \cp -f /data/jars/dash-azure-storage-2.2.0.jar ${line%azure*}; rm -f $line; done
