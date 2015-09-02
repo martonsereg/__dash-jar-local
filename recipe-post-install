@@ -1,2 +1,15 @@
 #!/bin/bash
-find / -name "azure-storage*.jar" | while read line; do echo "Replacing $line"; \cp -f /data/jars/dash-azure-storage-2.2.0.jar ${line%azure*}; rm -f $line; done
+
+: ${SOURCE_DIR:=/data/jars}
+: ${STORAGE_JAR:=dash-azure-storage-2.2.0.jar}
+
+main(){
+  if [ ! -f "$SOURCE_DIR/$STORAGE_JAR" ]; then
+    echo 'DASH storage jar not found in the source directory, downloading it.'
+    curl -o "$SOURCE_DIR/$STORAGE_JAR" "https://www.dash-update.net/client/Latest/StorageSDK2.0/$STORAGE_JAR";
+  fi
+
+  find / -name "azure-storage*.jar" | while read line; do echo "Replacing $line"; \cp -f "$SOURCE_DIR/$STORAGE_JAR" "${line%azure*}"; rm -f $line; done
+}
+
+[[ "$0" == "$BASH_SOURCE" ]] && main "$@"

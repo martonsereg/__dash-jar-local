@@ -1,1 +1,3 @@
-# consul-plugins-__dash-jar-local
+###__dash-jar-local
+
+copies the DASH storage jars to the correct location
