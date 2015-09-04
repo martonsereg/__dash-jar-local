@@ -1,5 +1,7 @@
 #!/bin/bash
 
+: ${LOGFILE:=/var/log/consul-watch/consul_handler.log}
+
 : ${SOURCE_DIR:=/data/jars}
 : ${STORAGE_JAR:=dash-azure-storage-2.2.0.jar}
 
@@ -11,7 +13,9 @@ main(){
     curl -o "$SOURCE_JAR" "https://www.dash-update.net/client/Latest/StorageSDK2.0/$STORAGE_JAR";
   fi
 
+  echo "Replacing azure-storage.jar with $STORAGE_JAR"
   find / -name "azure-storage*.jar" | while read line; do echo "Replacing $line"; \cp -f "$SOURCE_JAR" "${line%azure*}"; rm -f $line; done
 }
 
+exec &> "$LOGFILE"
 [[ "$0" == "$BASH_SOURCE" ]] && main "$@"
