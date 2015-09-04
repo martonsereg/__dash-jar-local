@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 : ${LOGFILE:=/var/log/consul-watch/consul_handler.log}
 
